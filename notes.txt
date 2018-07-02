@@ -1,0 +1,48 @@
+1)- jQuery or JavaScript
+
+App.messages.method_name({ key:value })
+
+--------------------------------------------------------------------
+
+2)- javascript/channels/messages.js
+
+App.messages = App.cable.subscription.create({
+    channel: channel_name,
+    room_id: room_id
+},
+{
+    received: function(data){ something }
+    send_message: function(data){ this.perform( channel_method_name, data ) }
+});
+
+--------------------------------------------------------------------
+
+3)- app/channels/channel_name.rb
+
+def channel_method_name( data )
+    Active Record Query and/or model method call
+end
+
+--------------------------------------------------------------------
+
+4)- ActionCable.server.broadcast "unique string"
+
+action: "some action name"
+key: data["key"]
+
+--------------------------------------------------------------------
+
+5)- app/channels/channel_name.rb
+
+def subscribed
+    stream_from "unique string"
+end
+
+--------------------------------------------------------------------
+
+6)- javascript/channels/messages.js
+
+App.messages:App.cable.subscriptions.create...
+received:function(data){
+    jQuery or JavaScript ( show on webpage )
+}
