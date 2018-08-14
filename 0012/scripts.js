@@ -17,14 +17,18 @@
 // What is the value of the first triangle number to have over five hundred divisors ?
 
 let n = 1;
+// let n = 7438; //=> incorrect
+
+
 // find triangle
-nthTriangle = (num) => {
+const nthTriangle = (num) => {
     return num*(num+1)/2;
 }
+
 // find divisors
-divisors = (num) => {
-    var tmp, arr=[];
-    for( tmp=1; tmp<=num; tmp++ ){
+const divisors = (num) => {
+    var tmp, arr=[1];
+    for( tmp=2; tmp<=num/2; tmp++ ){
         if( num%tmp===0 ){
             arr.push(tmp);
         }
@@ -32,7 +36,10 @@ divisors = (num) => {
     return arr;
 }
 
-while( divisors(nthTriangle(n)).length <= 500 ){
+// incorrect answer
+// console.log(nthTriangle(2079), divisors(nthTriangle(2079)) );
+
+while( divisors(nthTriangle(n)).length < 500 ){
     var currentTri = nthTriangle(n);
     var currentDivs = divisors(currentTri);
     console.log({n, currentTri, currentDivs});
